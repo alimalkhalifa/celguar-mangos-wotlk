@@ -7968,7 +7968,10 @@ void Spell::DelayedChannel()
 
 void Spell::UpdateOriginalCasterPointer()
 {
-    if (m_originalCasterGUID == m_trueCaster->GetObjectGuid() && m_trueCaster->IsUnit())
+    if (m_trueCaster == nullptr) {
+        m_originalCaster = nullptr;
+    }
+    else if (m_originalCasterGUID == m_trueCaster->GetObjectGuid() && m_trueCaster->IsUnit())
         m_originalCaster = static_cast<Unit*>(m_trueCaster);
     else if (m_originalCasterGUID.IsGameObject())
     {
